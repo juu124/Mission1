@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mission1">
         <activity
+            android:name=".ScoreAddActivity"
+            android:exported="false" />
+        <activity
             android:name=".DetailActivity"
             android:exported="false" />
         <activity
