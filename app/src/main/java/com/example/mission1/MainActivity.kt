@@ -3,6 +3,7 @@ package com.example.mission1
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -12,9 +13,13 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mission1.adapter.MainAdapter
+import com.example.mission1.callback.DialogCallback
+import com.example.mission1.callback.PermissionCallback
 import com.example.mission1.databinding.ActivityMainBinding
 import com.example.mission1.db.DBHelper
 import com.example.mission1.model.Student
+import com.example.mission1.util.checkAllPermission
+import com.example.mission1.util.showMessageDialog
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -57,7 +62,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         // 리스트 만드는 함수
-        makeRecyclerView()
+        // 아래 권한에서 리스트 만들도록 수정됨
+        // makeRecyclerView()
+
+        // 앱을 위한 모든 퍼미션 체크
+        checkAllPermission(this as ComponentActivity, object  : PermissionCallback {
+            override fun onPermissionResult(isAllGranted: Boolean) {
+                if (isAllGranted) {
+                    // 권한이 허락되면 그때 리스트를 그리겠다.
+                    makeRecyclerView()
+                } else {
+                    showDialog()
+                }
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
@@ -112,5 +130,22 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         }
+    }
+
+    private fun showDialog() {
+        showMessageDialog(
+            this,
+            getString(R.string.permission_denied),
+            "확인",
+            null,
+            object : DialogCallback {
+                override fun onPositiveCallBack() {
+                    finish()
+                }
+
+                override fun onNegativeCallBack() {
+
+                }
+            })
     }
 }
