@@ -90,6 +90,7 @@ ScrollView를 사용하면 스크롤 되어야하는 영역을 감쌀 수 있다
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_gravity="center_vertical"
                 android:gravity="center_horizontal"
                 android:text="memo" />
 
