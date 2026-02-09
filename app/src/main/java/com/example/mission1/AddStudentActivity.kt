@@ -55,7 +55,7 @@ class AddStudentActivity : AppCompatActivity() {
             showToast(this, getString(R.string.add_name_null))
         } else {
             // db 저장
-            val db = DBHelper(this).writableDatabase
+            val db = DBHelper(this).readableDatabase
             val values = ContentValues().apply {
                 put("name", name)
                 put("email", email)

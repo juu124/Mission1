@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    코드에서 사이즈를 사용한다. 폰 사이즈 호환성을 위해서 dimens.xml 에 등록한다. 코드 획득해서 알아서 density가 곱해지게-->
+    <dimen name="myview_size">40dp</dimen>
+    <dimen name="myview_stroke_width">7dp</dimen>
+</resources>
