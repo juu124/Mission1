@@ -71,6 +71,8 @@ class DetailActivity : AppCompatActivity() {
                 map["date"] = sdFormat.format(d)
                 scoreList.add(map)
                 adapter.notifyDataSetChanged()
+
+                binding.detailScore.score = score.toInt()
             }
         }
 
@@ -103,7 +105,19 @@ class DetailActivity : AppCompatActivity() {
 
             student = Student(id, name, email, phone, photoFilePath, cursor.getString(5))
         }
+        val scoreCursor = db.rawQuery(
+            "SELECT score FROM tb_score WHERE student_id = ? ORDER BY date DESC LIMIT 1",
+            arrayOf(id.toString())
+        )
+
+        var score = 0
+        if (scoreCursor.moveToFirst()) {
+            score = scoreCursor.getInt(0)
+        }
+
+        binding.detailScore.score = score
     }
+
 
     private fun setInitScoreData(id: Int) {
         // db 에서 데이터 추출(select)

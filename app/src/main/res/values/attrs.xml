@@ -3,7 +3,9 @@
     <!--   커스텀 뷰를 만들거다 선임 개발자라고 하자-->
     <!-- 후배 들이 view를 이용한다. layout xml 로 화면구성해서 사용한다.
     layout xml 에 커스텀 뷰를 추가하면서, custom 속성 사용 가능하다.
-    사용하려면 등록해야한다.
+    사용하려면 등록해야한다. 여기에 추가하면 빌더가 해당 속성들을 참조한다. 속성들을 AAA로 묶어서 참조된다.
+
+    커스텀 속성 코드는 공통 코드이다.
     즉 내가 커스텀한 속성 app:AAA = "#ffffff" 이런 식으로 사용하게끔 만들려면 내가 등록해야한다.-->
     <declare-styleable name="AAA">
         <attr name="customColor" format="color"/>
